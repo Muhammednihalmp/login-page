@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="login">
+        <form id="loginForm">
+            <h1>LOG IN</h1>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter Username">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter Password">
+            <button type="submit">Log in</button>
+            <p>I Don't have an account? <a href="sign.html">Sign up</a></p>
+            <p id="loginMessage"></p>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript for login interaction
+        const loginForm = document.getElementById('loginForm');
+        const loginMessage = document.getElementById('loginMessage');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === '' || password === '') {
+                loginMessage.textContent = "Please fill out all fields!";
+                loginMessage.style.color = "orange";
+            } else {
+                loginForm.style.animation = "fadeOut 1s forwards";
+                loginMessage.textContent = "Login Successful!";
+                loginMessage.style.color = "orange";
+
+                setTimeout(() => {
+                    alert("Welcome " + username + "!");
+                    loginForm.reset();
+                    loginForm.style.animation = "fadeIn 1s forwards";
+                }, 1500);
+            }
+        });
+
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fadeOut {
+                to { opacity: 0; transform: translateY(20px); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
